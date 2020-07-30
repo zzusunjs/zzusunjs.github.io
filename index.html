@@ -160,6 +160,176 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://github.sunjs.io/2020/07/31/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AAVue%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Jinsheng Sun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzusunjs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/31/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AAVue%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">从零开始构建一个 Vue 项目</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-31 00:10:31 / 修改时间：00:18:16" itemprop="dateCreated datePublished" datetime="2020-07-31T00:10:31+08:00">2020-07-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontEnd/" itemprop="url" rel="index"><span itemprop="name">frontEnd</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontEnd/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="../pics/ocean.jpg">
+
+
+
+
+
+<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>​    </p>
+<p>知其然还要知其所以然，很多时候我们不能仅仅停留在表面，而是要深入挖掘原理。只有掌握了原理才能更好的使用工具，才能批判地继承各种工具背后的解决方案的理念，才能在应用场景变化的时候轻松面对，才能有设计和创新。这是术和道的区别，也是码农和工程师的区别。</p>
+<p>​    </p>
+<p>使用 Vue-Cli 可以快速，方便，轻松的创建项目，但是不利于大家深入理解 Vue 和 Webpack 以及 npm 这些 更为基础的工具。而这些工具在高级的前端项目中是必不可少的，是必须掌握的。所以，能不能从零开始，不借助 Vue-Cli 创建一个 Vue项目可以被看做一个前端工程师 是否入门的 一种标准。而从零开始构建一个Vue项目本身就是我们学习的过程。</p>
+<p>​    </p>
+<p>从零开始，不借助 Vue-Cli 构建一个前端项目可以大致分为 3 个步骤。</p>
+<ul>
+<li>使用 npm 初始化一个项目</li>
+<li>编写 最基础的 Vue 代码</li>
+<li>使用 webpack 启动项目</li>
+</ul>
+<p>当然，在这三步之前需要你有一台已经安装了 nodejs，vscode, chrome浏览器等前端开发环境的电脑。</p>
+<p>​    </p>
+<h5 id="使用-npm-初始化一个项目"><a href="#使用-npm-初始化一个项目" class="headerlink" title="使用 npm 初始化一个项目"></a>使用 npm 初始化一个项目</h5><p>​    </p>
+<blockquote>
+<p> npm 为你和你的团队打开了连接整个 JavaScript 天才世界的一扇大门。它是世界上最大的软件注册表，每星期大约有 30 亿次的下载量，包含超过 600000 个 <em>包（package）</em> （即，代码模块）。来自各大洲的开源软件开发者使用 npm 互相分享和借鉴。包的结构使您能够轻松跟踪依赖项和版本。      – npm 中文网。</p>
+</blockquote>
+<p>npm 其实就是 nodejs package manager，就是 nodejs 的包管理工具，就像 Python 里面的 pip。因为十分好用，在浏览器端的开发中也十分常用。npm 在前端项目中承担着 包的安装，卸载，更新等功能。</p>
+<p>好了，言归正传，使用 npm 初始化一个项目十分简单，<code>npm init -y</code> 即可。<code>npm init</code> 被用于在一个文件夹下初始化一个 前端项目，回车之后，在命令行中会以“对话”的形式询问你关于项目的各种信息。使用 <code>-y</code> 参数可以按照默认值直接创建项目，十分方便。</p>
+<p>npm 初始化之后的得到的 package.json 内容如下。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"tmp"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"keywords"</span>: [],</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>命令行看起来是这样儿的。</p>
+<img src="../pics/startvuefromzero/npminit-y.png" width="500">
+
+<p>​                                                            图1 在命令行中运行 npm init -y 的结果 </p>
+<h5 id="编写最基础的-Vue-代码"><a href="#编写最基础的-Vue-代码" class="headerlink" title="编写最基础的 Vue 代码"></a>编写最基础的 Vue 代码</h5><p>有了一个 package.json 之后，就可以开始编写最基础的Vue代码了。首先我们需要使用 npm 安装一下 vue 和 vue-router。vue-router 是 vue 全家桶（vue，vue-router, vuex 等等）中必不可少的一员，所以这里我们也用一下 vue-router。具体安装命令为：<code>npm install vue vue-router --save</code></p>
+<p>现在可以开始写代码了。 </p>
+<ul>
+<li><p>package.json 同级目录下 新建 一个 index.html， 内容如下。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>WOW<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"application"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>&lt;div id=&quot;application&quot;&gt;&lt;/div&gt;</code> 就是 整个 vue 实例的挂载点。</p>
+</li>
+<li><p>package.json 同级目录下 新建 src 文件夹，src 文件夹下新建 index.js 和 App.vue ，内容如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span>;</span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#application'</span>,</span><br><span class="line">    router,</span><br><span class="line">    render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>其中 router 是 路由文件，需要使用 vue-router，下面会给出具体代码。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;router-view&gt;&lt;<span class="regexp">/router-view&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'App'</span>,</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>App.vue 就是标准 的  vue文件的结构，先是 template，然后是 script，然后是 style。上面文件中省略了 style，而其中的<code>&lt;router-view&gt;&lt;/router-view&gt;</code> 正是 vue-router，具体的原理有待后续了解。</p>
+</li>
+</ul>
+<ul>
+<li><p>然后开始编写 路由。package.json 同级目录下新建 router 文件夹，router 文件夹下 新建 index.js，内容如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'vue-router'</span>;</span><br><span class="line"><span class="keyword">import</span> Main <span class="keyword">from</span> <span class="string">"../components/main.vue"</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(Router);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    routes: [</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">'/'</span>,</span><br><span class="line">            name: <span class="string">'main'</span>,</span><br><span class="line">            component: Main,</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上面代码仅仅指定了一个路由，默认路径<code>/</code>下有 <code>Main</code> 组件 响应，而 <code>Main</code> 组件正是在 src/components/main.vue 中。</p>
+</li>
+<li><p>接上面一步，在src目录下新建文件夹 components，新建文件 main.vue，代码如下。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/components/main.vue</span></span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=<span class="string">"mainBox"</span>&gt;</span><br><span class="line">        &lt;h3&gt;R U OK ?&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">    data()&#123;</span></span><br><span class="line"><span class="regexp">        return&#123;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">#mainBox&#123;</span><br><span class="line">    width: <span class="number">100</span>%;</span><br><span class="line">    height: <span class="number">100</span>%;</span><br><span class="line">    margin: <span class="number">0</span> auto;</span><br><span class="line">    text-align: center;</span><br><span class="line">    border: <span class="number">2</span>px solid salmon;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>到这里，启动一个 vue 项目的代码已经编写完毕。目录结构如下所示。</p>
+<img src="../pics/startvuefromzero/fileStructure.png" width="400">
+
+<p> 图2 一个从零开始配置的Vue项目的目录结构，其中 dist 文件夹为webpack打包结果，webpack.config.js为下一部分所要添加的内容。 </p>
+<h5 id="使用-Webpack-启动项目"><a href="#使用-Webpack-启动项目" class="headerlink" title="使用 Webpack 启动项目"></a>使用 Webpack 启动项目</h5><p>有了基本的代码，还需要借助 webpack 的力量通过打包构建让整个项目能够在浏览器中运行起来。关于webpack 的基本原理请参考<a href="https://www.bilibili.com/video/BV1a741197Hn?from=search&seid=296661155831463223" target="_blank" rel="noopener">腾讯NEXT学院webpack教程</a>，篇幅有限，这里就不展开了。</p>
+<ul>
+<li><p>第一步是先安装相关的依赖。</p>
+<p>首先需要安装 webpack 和 webpack-cli </p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install webpack webpack-cli --save-dev</span><br></pre></td></tr></table></figure>
+
+<p>然后 webpack 还需要 vue-loader 以及  vue-template-compiler 才能处理 .vue 格式的文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-loader vue-template-compiler --save</span><br></pre></td></tr></table></figure>
+
+<p>然后 webpack 还需要 css-loader 和 style-loader 才能处理 css 样式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install css-loader style-loader --save-dev</span><br></pre></td></tr></table></figure>
+
+<p>最后，webpack 还需要 一个 html-webpack-plugin 的插件将 最终打包的 css 和 js 插入到 html 中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install html-webpack-plugin --save-dev</span><br></pre></td></tr></table></figure>
+
+<p>安装好这些插件以及loader 后，还需要写一个配置文件告诉webpack如何使用它们。在 package.json 同级目录下新建一个 webpack.config.js 文件，内容如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> VueLoaderPlugin = <span class="built_in">require</span>(<span class="string">'vue-loader/lib/plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: path.join(__dirname, <span class="string">"\\src\\index.js"</span>),</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.join(__dirname, <span class="string">"/dist"</span>),</span><br><span class="line">        filename: <span class="string">'bundle.js'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>:&#123;</span><br><span class="line">        rules:[</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.vue$/</span>,</span><br><span class="line">                include: <span class="regexp">/src/</span>,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: <span class="string">'vue-loader'</span>,</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">                use: [<span class="string">'style-loader'</span>, <span class="string">'css-loader'</span>]</span><br><span class="line">            &#125;,</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins:[</span><br><span class="line">        <span class="keyword">new</span> VueLoaderPlugin(),</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            filename: <span class="string">'index.html'</span>,</span><br><span class="line">            template: <span class="string">'index.html'</span>,</span><br><span class="line">            inject: <span class="literal">true</span>,</span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br><span class="line">    mode: <span class="string">'production'</span>,</span><br><span class="line">    devServer:&#123;</span><br><span class="line">        quiet: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，在 package.json 的 “scripts” 下添加命令，结果如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">   <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</span><br><span class="line">   <span class="string">"dev"</span>: <span class="string">"webpack-dev-server --config webpack.config.js --open --inline --progress"</span></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>最后的最后，打开命令行，<code>npm run dev</code> …</p>
+<img src="../pics/startvuefromzero/result.png" width=600>
+
+
+
+<h5 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h5><ul>
+<li><a href="https://www.jianshu.com/p/635257fbb062" target="_blank" rel="noopener">不借助Vue-Cli 初始化 Vue 项目</a></li>
+<li><a href="https://www.webpackjs.com/" target="_blank" rel="noopener">webpack</a></li>
+<li><a href="https://www.npmjs.cn/" target="_blank" rel="noopener">npm</a></li>
+<li><a href="https://cn.vuejs.org/" target="_blank" rel="noopener">vue</a></li>
+<li><a href="https://www.bilibili.com/video/BV1a741197Hn?from=search&seid=296661155831463223" target="_blank" rel="noopener">腾讯NEXT学院webpack教程</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://github.sunjs.io/2020/04/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -435,20 +605,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
